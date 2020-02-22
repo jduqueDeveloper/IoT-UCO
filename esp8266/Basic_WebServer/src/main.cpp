@@ -4,8 +4,7 @@
 
 // Replace with your network credentials
 const char* ssid = "xxxxx";
-const char* password = "xxxxx";
-
+const char* password = "xxxxxxxx";
 // WebServer Instantiation
 ESP8266WebServer server(80);
 
@@ -38,6 +37,9 @@ void setup(void){
   //Web Page handler on root "/" using .send() method from ESP8266WebServer class
   server.on("/", [](){
     server.send(200, "text/html", webPage);
+  });
+  server.on("/azul", [](){
+    server.send(200, "text/html", webPage += "<body style = 'background-color: #0000FF;'</body>");
   });
 
   //Start Web Server and notify via serial comm.
