@@ -3,8 +3,8 @@
 #include <ESP8266WebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "xxxxx";
-const char* password = "xxxxxxxx";
+const char* ssid = "xxxx";
+const char* password = "xxxxx";
 // WebServer Instantiation
 ESP8266WebServer server(80);
 
@@ -39,7 +39,7 @@ void setup(void){
     server.send(200, "text/html", webPage);
   });
   server.on("/azul", [](){
-    server.send(200, "text/html", webPage += "<body style = 'background-color: #0000FF;'</body>");
+    server.send(200, "text/html", webPage += "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/1200px-Python.svg.png'>");
   });
 
   //Start Web Server and notify via serial comm.
