@@ -1,22 +1,41 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
+#include <Servo.h>
 
 // Replace with your network credentials
-const char* ssid = "TP-LINK_3C02";
-const char* password = "camila1234";
+const char* ssid = "SEA UCO";
+const char* password = "SeaUco666";
 // WebServer Instantiation
 ESP8266WebServer server(80);
 
-//Web Page Variable
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+String header;
+
+// Decode HTTP GET value
+String valueString = String(5);
+int pos1 = 0;
+int pos2 = 0;
 
 const char Server_Page[] PROGMEM = R"=====(
 <html>
-<body>
-<center>
-<h1></h1><br>
-<style>
-  .button{
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <style>
+    body {
+      text-align: center;
+      font-family: "Trebuchet MS", Arial;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .slider {
+      width: 300px;
+    }
+
+    .button{
     color: white
     padding: 20px 34px;
     text-aling: center;
@@ -24,37 +43,44 @@ const char Server_Page[] PROGMEM = R"=====(
     margin: 4px 2px;
     cursor: pointer;
   }
+  </style>
 
-  .slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
-  appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
-}
 
-</style>
 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>ESP8266 with Servo</h1>
 <form>
-  <button type = "submit" formaction = "/gpio1-on">Click me to do magic!</button>
-  <button type = "submit" formaction = "/gpio1-off">Click me to finish the magic!</button>
+  <button type = "submit" formaction = "/led-on">Click me to do magic!</button>
+  <button type = "submit" formaction = "/led-off">Click me to finish the magic!</button>
 </form>
-
-<div class="slidecontainer">
-  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-</div>
-
-</center>
+  <p>Position: <span id="servoPos"></span></p>
+  <input type="range" min="0" max="180" class="slider" id="servoSlider" onchange="servo(this.value)"/>
+  <script>
+    var slider = document.getElementById("servoSlider");
+    var servoP = document.getElementById("servoPos");
+    servoP.innerHTML = slider.value;
+    slider.oninput = function() {
+      slider.value = this.value;
+      servoP.innerHTML = this.value;
+    }
+    $.ajaxSetup({timeout:1000});
+    function servo(pos) {
+      $.get("/?value=" + pos + "&");
+      {Connection: close};
+    }
+  </script>
 </body>
 </html>
 
 )=====";
  
 void setup(void){
+
+  myservo.attach(13); 
 
   pinMode(LED_BUILTIN,OUTPUT);
   pinMode(LED_BUILTIN, HIGH);
@@ -79,12 +105,12 @@ void setup(void){
   server.on("/", [](){
     server.send(200, "text/html", Server_Page);
   });
-  server.on("/gpio1-on", [](){
+  server.on("/led-on", [](){
     digitalWrite(LED_BUILTIN, LOW);
     server.send(200, "text/html", Server_Page);
   });
 
-  server.on("/gpio1-off", [](){
+  server.on("/led-off", [](){
     digitalWrite(LED_BUILTIN, HIGH);
     server.send(200, "text/html", Server_Page);
   });
@@ -98,4 +124,16 @@ void setup(void){
 void loop(void){
   //Handle client requests to web Server using .handleClient() method from ESP8266WebServer class
   server.handleClient();
+
+  //GET /?value=180& HTTP/1.1
+  if(header.indexOf("GET /?value=")>=0) {
+    pos1 = header.indexOf('=');
+    pos2 = header.indexOf('&');
+    valueString = header.substring(pos1+1, pos2);
+              
+    //Rotate the servo
+    myservo.write(valueString.toInt());
+    Serial.println(valueString); 
+  } 
+
 }
