@@ -2,13 +2,13 @@
 #define CREDENTIALS_H
 
 // ---------------- Wifi Credentials ------------------
-#define SSID "IoT-UCO"
-#define PASSWORD "LifeisIoT"
+#define SSID "xxxxx"
+#define PASSWORD "xxxxx"
 //-----------------------------------------------------
 
 // ------------ Web page Credentials ------------------
-#define USER "juan"
-#define USER_PASSWORD "70286102"
+#define USER "xxxxx"
+#define USER_PASSWORD "xxxxx"
 //-----------------------------------------------------
 
 #endif
