@@ -4,8 +4,10 @@
 #include <Servo.h>
 
 // Replace with your network credentials
-const char* ssid = "SEA UCO";
-const char* password = "SeaUco666";
+const char* ssid = "xx";
+const char* password = "xx";
+const char* login_user = "xx";
+const char* login_password = "xx";
 // WebServer Instantiation
 ESP8266WebServer server(80);
 
@@ -46,17 +48,13 @@ const char Server_Page[] PROGMEM = R"=====(
   </style>
 
 
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>ESP8266 with Servo</h1>
 <form>
   <button type = "submit" formaction = "/led-on">Click me to do magic!</button>
   <button type = "submit" formaction = "/led-off">Click me to finish the magic!</button>
-</form>
+
   <p>Position: <span id="servoPos"></span></p>
   <input type="range" min="0" max="180" class="slider" id="servoSlider" onchange="servo(this.value)"/>
   <script>
@@ -73,6 +71,7 @@ const char Server_Page[] PROGMEM = R"=====(
       {Connection: close};
     }
   </script>
+</form>
 </body>
 </html>
 
@@ -103,6 +102,9 @@ void setup(void){
   
   //Web Page handler on root "/" using .send() method from ESP8266WebServer class
   server.on("/", [](){
+    if(!server.authenticate(login_user, login_password)){
+      return server.requestAuthentication();
+    }
     server.send(200, "text/html", Server_Page);
   });
   server.on("/led-on", [](){
