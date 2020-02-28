@@ -3,14 +3,14 @@
 #include <ESP8266WebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "xxxx";
-const char* password = "xxxx";
+const char* ssid = "IoT-UCO";
+const char* password = "LifeisIoT";
 
 // WebServer Instantiation
 ESP8266WebServer server(80);
 
-const char* www_username = "xxxx";
-const char* www_password = "xxxx";
+const char* www_username = "admin";
+const char* www_password = "admin";
 
 #define LED D1
 
