@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+  crossorigin="anonymous"
+  >
+
+  <header>
+    <div class="p-3 mb-2 bg-primary text-white text-center">
+      <h3>
+        Iot Control System
+        <h6><a href="/LogOut" class="text-light">  LogOut  </a> </h6>
+      </h3>
+    </div>
+  </header>
+
+  <body class="bg-light">
+    <div class="text-center">
+      <h2 class="text-center">Led</h2>
+      <a href="/?Led=1">
+        <button type="button" class="btn btn-outline-success" style="width: 200px">Encender</button>
+      </a>
+      <a href="/?Led=0">
+        <button type="button" class="btn btn-outline-danger" style="width: 200px">Apagar</button>
+      </a>
+    </div>
+
+    <hr class="m-5">
+
+    <div class="text-center">
+      <h2 class="text-center">Load 1</h2>
+      <a href="/?Load1=1">
+        <button type="button" class="btn btn-outline-success" style="width: 200px">Encender</button>
+      </a>
+      <a href="/?Load1=0">
+        <button type="button" class="btn btn-outline-danger" style="width: 200px">Apagar</button>
+      </a>
+    </div>
+
+    <hr class="m-5">
+
+    <div class="text-center mx-5 px-5">
+      <h2 class="text-center">Load 2</h2>
+      <form action="/">
+        <input type="number" class="form-control text-center" name="Load2" min="0" max="100"><br>
+        <input type="submit" class="btn btn-primary" value="Set PWM">
+      </form>
+    </div>
+
+  </body>
+</html>
