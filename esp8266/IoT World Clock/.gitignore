@@ -1,0 +1,8 @@
+.pio
+.vscode
+Pluggins
+inlcude
+lib
+src/credentials.h
+test
+
