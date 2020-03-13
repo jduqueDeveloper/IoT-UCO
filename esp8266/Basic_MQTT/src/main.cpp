@@ -2,8 +2,8 @@
 #include <PubSubClient.h>
 #include <ESP8266HTTPClient.h>
  
-const char* ssid = "xxx";
-const char* password =  "xxx";
+const char* ssid = "IoT-UCO";
+const char* password =  "LifeisIoT";
 const char* mqttServer = "ip_broker";
 const int mqttPort = 1883;
 const char* TopicSub = "test";
