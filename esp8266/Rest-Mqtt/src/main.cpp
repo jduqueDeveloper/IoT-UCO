@@ -5,8 +5,8 @@
 #include <rest/rest.h>
 #include <mqtt/mqtt_service.h>
  
-const char* ssid = "SAN JOSE";
-const char* password =  "SanMiguelArcangel";
+const char* ssid = "xxx";
+const char* password =  "xxx";
 const char* mqttServer = "192.168.0.107";
 const int mqttPort = 1883;
 
