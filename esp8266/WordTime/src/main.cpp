@@ -4,11 +4,10 @@
 
 const char* ssid = "****";
 const char* password =  "****";
-
-const char* mqttServer = "m16.cloudmqtt.com";
-const int mqttPort = 	13769;
-const char* mqttUser = "tnoohysg";
-const char* mqttPassword = "mA-_pD67H39I";
+const char* mqttServer = "****";
+const int mqttPort = 	0;
+const char* mqttUser = "****";
+const char* mqttPassword = "****";
 const char* TopicSub = "worldTime";
 const char* TopicPub = "worldTime";
 
